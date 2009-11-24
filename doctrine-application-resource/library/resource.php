@@ -25,31 +25,31 @@ class App_Application_Resource_Doctrine extends Zend_Application_Resource_Resour
         }
 
         $loader = Zend_Loader_Autoloader::getInstance();
-        $loader->pushAutoloader(array('Doctrine', 'autoload'), 'Doctrine');
+        $loader->pushAutoloader(array('Doctrine_Core', 'autoload'), 'Doctrine');
 
         $manager = Doctrine_Manager::getInstance();
 
-        // set models to be autoloaded and not included (Doctrine::MODEL_LOADING_AGGRESSIVE)
+        // set models to be autoloaded and not included (Doctrine_Core::MODEL_LOADING_AGGRESSIVE)
         $manager->setAttribute(
-            Doctrine::ATTR_MODEL_LOADING,
-            Doctrine::MODEL_LOADING_CONSERVATIVE
+            Doctrine_Core::ATTR_MODEL_LOADING,
+            Doctrine_Core::MODEL_LOADING_CONSERVATIVE
         );
 
         // enable ModelTable classes to be loaded automatically
         $manager->setAttribute(
-            Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES,
+            Doctrine_Core::ATTR_AUTOLOAD_TABLE_CLASSES,
             true
         );
 
         // enable validation on save()
         $manager->setAttribute(
-            Doctrine::ATTR_VALIDATE,
-            Doctrine::VALIDATE_ALL
+            Doctrine_Core::ATTR_VALIDATE,
+            Doctrine_Core::VALIDATE_ALL
         );
 
         // enable sql callbacks to make SoftDelete and other behaviours work transparently
         $manager->setAttribute(
-            Doctrine::ATTR_USE_DQL_CALLBACKS,
+            Doctrine_Core::ATTR_USE_DQL_CALLBACKS,
             true
         );
 
@@ -70,7 +70,7 @@ class App_Application_Resource_Doctrine extends Zend_Application_Resource_Resour
             $cacheDriver = new Doctrine_Cache_Apc();
 
             $manager->setAttribute(
-                Doctrine::ATTR_QUERY_CACHE,
+                Doctrine_Core::ATTR_QUERY_CACHE,
                 $cacheDriver
             );
         }
