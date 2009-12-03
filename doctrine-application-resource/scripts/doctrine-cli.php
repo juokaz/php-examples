@@ -10,6 +10,7 @@ define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),
+    './',
     get_include_path(),
 )));
 
@@ -21,16 +22,18 @@ $application = new Zend_Application(
     APPLICATION_PATH . '/configs/application.ini'
 );
 
-$application->getBootstrap()->bootstrap('doctrine');
+$application->getBootstrap()
+        ->bootstrap('doctrine')
+        ->bootstrap('autoload');
+
+// set aggressive loading to make sure migrations are working
+Doctrine_Manager::getInstance()->setAttribute(
+    Doctrine::ATTR_MODEL_LOADING,
+    Doctrine_Core::MODEL_LOADING_AGGRESSIVE
+);
+
 $options = $application->getBootstrap()->getOptions();
 
 $cli = new Doctrine_Cli($options['resources']['doctrine']);
-
-// Load tasks from custom location
-$tasks = './Doctrine/Task';
-if (file_exists($tasks))
-{
-	$cli->loadTasks($tasks);
-}
 
 $cli->run($_SERVER['argv']);

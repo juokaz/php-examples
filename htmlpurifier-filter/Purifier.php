@@ -34,9 +34,11 @@ class App_Filter_Purifier implements Zend_Filter_Interface
             $options = array_merge($options, $newOptions);
         }
 
+        // default options
+        $config = HTMLPurifier_Config::createDefault();
+        
         if (!is_null($options))
         {
-            $config = HTMLPurifier_Config::createDefault();
             foreach ($options as $option) {
                 $config->set($option[0] . '.' . $option[1], $option[2]);
             }
