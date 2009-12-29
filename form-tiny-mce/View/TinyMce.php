@@ -112,11 +112,11 @@ class App_View_Helper_TinyMce extends Zend_View_Helper_Abstract
             return;
         }
         $script = 'tinyMCE_GZ.init({' . PHP_EOL
-                . 'themes: "' . implode(',', $this->_supported['theme']) . '"' . PHP_EOL
-                . 'plugins: "'. implode(',', $this->_supported['plugins']) . '"' . PHP_EOL
-                . 'languages: "' . implode(',', $this->_supported['languages']) . '"' . PHP_EOL
-                . 'disk_cache: true' . PHP_EOL
-                . 'debug: false' . PHP_EOL
+                . 'themes: "' . implode(',', $this->_supported['theme']) . '",' . PHP_EOL
+                . 'plugins: "'. implode(',', $this->_supported['plugins']) . '",' . PHP_EOL
+                . 'languages: "' . implode(',', $this->_supported['languages']) . '",' . PHP_EOL
+                . 'disk_cache: true,' . PHP_EOL
+                . 'debug: false,' . PHP_EOL
                 . '});';
 
         $this->view->headScript()->appendScript($script);

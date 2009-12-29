@@ -29,7 +29,7 @@ class App_Form_Element_TinyMce extends Zend_Form_Element_Textarea
         );
 
         $this->setOptions(array('editorOptions' => 
-            array('plugins' => 'table', 'UseCompressor' => true) + $theme)
+            array('plugins' => 'table') + $theme)
             );
     }
 }
